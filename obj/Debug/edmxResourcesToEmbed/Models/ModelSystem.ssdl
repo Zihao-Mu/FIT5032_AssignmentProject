@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DiningTable">
+    <Key>
+      <PropertyRef Name="TableId" />
+    </Key>
+    <Property Name="TableId" Type="int" Nullable="false" />
+    <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Size" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HalfPriceDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="DishId" />
+    </Key>
+    <Property Name="DishId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Category" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Money" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="HalfPriceDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="OrderDate" Type="date" Nullable="false" />
+    <Property Name="Category" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="TableId" Type="int" />
+    <Property Name="DishId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderMenu">
+    <Key>
+      <PropertyRef Name="OrderMenuId" />
+    </Key>
+    <Property Name="OrderMenuId" Type="int" Nullable="false" />
+    <Property Name="DishId" Type="int" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Order__TableId__3B75D760">
+    <End Role="DiningTable" Type="Self.DiningTable" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiningTable">
+        <PropertyRef Name="TableId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="TableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderMenu__DishI__3F466844">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+    <End Role="OrderMenu" Type="Self.OrderMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="DishId" />
+      </Principal>
+      <Dependent Role="OrderMenu">
+        <PropertyRef Name="DishId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderMenu__Order__403A8C7D">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderMenu" Type="Self.OrderMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderMenu">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="DiningTable" EntityType="Self.DiningTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderMenu" EntityType="Self.OrderMenu" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Order__TableId__3B75D760" Association="Self.FK__Order__TableId__3B75D760">
+      <End Role="DiningTable" EntitySet="DiningTable" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderMenu__DishI__3F466844" Association="Self.FK__OrderMenu__DishI__3F466844">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="OrderMenu" EntitySet="OrderMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderMenu__Order__403A8C7D" Association="Self.FK__OrderMenu__Order__403A8C7D">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderMenu" EntitySet="OrderMenu" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>E-Restaurant</h1>
+    <p class="lead">E-Restaurant is a management system that can provide catering services to customers and company employees. All users, including employees and customers, can choose to eat in the restaurant or take it away. </p>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <p><a href="/Account/Register" class="btn btn-primary btn-lg">Register &raquo;</a><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="/Account/Login" class="btn btn-primary btn-lg">Login &raquo;</a></p>
+    }
+</div>
+
+<div class="row">
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="col-md-6">
+            <h2>About us</h2>
+            <p>
+                We are a local Tourism and Hospitality company with around 100 staff.
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="col-md-6">
+            <h2>Order First</h2>
+            <p>Your can view the menu by click 'Order Menu'. You can choose what you want first, and then decide whether to take it away or eat it in the restaurant.</p>
+            <p><a class="btn btn-default" href="/Menus">View Menu &raquo;</a></p>
+        </div>
+        <div class="col-md-6">
+            <h2>Booktable First</h2>
+            <p>Your can view table list by click 'Book Table'. You can book a prefered table first, and then order after you arrive at the restaurant.</p>
+            <p><a class="btn btn-default" href="/diningtables">Book Table &raquo;</a></p>
+        </div>
+        <div class="col-md-6">
+            <h2>Manage Order</h2>
+            <p>You can create, read, update, delete your order in here.</p>
+            <p><a class="btn btn-default" href="/orders">Manage Order &raquo;</a></p>
+        </div>
+        <div class="col-md-6">
+            <h2>About us</h2>
+            <p>
+                We are a local Tourism and Hospitality company with around 100 staff.
+            </p>
+            <p><a class="btn btn-default" href="">Learn more &raquo;</a></p>
+        </div>
+    }
+</div>

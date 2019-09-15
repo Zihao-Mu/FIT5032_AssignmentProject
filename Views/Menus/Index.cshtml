@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FIT5032_AssignmentProject.Models.Menu>
+
+@{
+    ViewBag.Title = "SelectDishes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Select Dish(es)</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DishId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Money)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HalfPriceDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DishId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Money)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HalfPriceDate)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DishId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DishId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DishId })
+        </td>*@
+    </tr>
+}
+
+</table>
